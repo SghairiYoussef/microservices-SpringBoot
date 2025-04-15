@@ -10,7 +10,7 @@ public class SignupRequestDTO {
     @Email(message = "Your Email should be in the correct format")
     private String email;
 
-    @NotBlank(message = "The name field should be required")
+    @NotBlank(message = "Name is Required")
     private String name;
 
     @NotBlank
