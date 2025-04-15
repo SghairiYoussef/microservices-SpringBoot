@@ -52,4 +52,92 @@ public class AuthIntegrationTest {
                 .then()
                 .statusCode(401);
     }
+
+    @Test
+    public void shouldReturnOkWithValidUser(){
+        String signUpPayload = """
+                    {
+                        "email":"signupTest@test.com",
+                        "name":"test",
+                        "password":"password123",
+                        "confirmPassword":"password123",
+                        "role":"ADMIN"
+                    }
+                """;
+
+        given()
+                .contentType("application/json")
+                .body(signUpPayload)
+                .when()
+                .post("/auth/signup")
+                .then()
+                .statusCode(201);
+    }
+
+    @Test
+    public void shouldReturnBadRequestOnInvalidEmail(){
+        String signupPayload = """
+                    {
+                        "email":"signupTest",
+                        "name":"test",
+                        "password":"password123",
+                        "confirmPassword":"password123",
+                        "role":"ADMIN"
+                    }
+                """;
+        Response response = given()
+                .contentType("application/json")
+                .body(signupPayload)
+                .when()
+                .post("/auth/signup")
+                .then()
+                .statusCode(400)
+                .body("email", notNullValue())
+                .extract()
+                .response();
+        System.out.println("Response body: " + response.jsonPath().getString("email"));
+    }
+
+    @Test
+    public void shouldReturnBadRequestOnMissingValues(){
+        String signupPayload = """
+                    {
+                        "email":"signupTest@test.com",
+                        "password":"password123",
+                        "confirmPassword":"password123",
+                        "role":"ADMIN"
+                    }
+                """;
+        given()
+                .contentType("application/json")
+                .body(signupPayload)
+                .when()
+                .post("/auth/signup")
+                .then()
+                .statusCode(400);
+    }
+
+    @Test
+    public void shouldReturnBadRequestOnPasswordMismatch(){
+        String signupPayload = """
+                    {
+                        "email":"signupTest",
+                        "name":"test",
+                        "password":"password123",
+                        "confirmPassword":"password12345",
+                        "role":"ADMIN"
+                    }
+                """;
+        Response response = given()
+                .contentType("application/json")
+                .body(signupPayload)
+                .when()
+                .post("/auth/signup")
+                .then()
+                .statusCode(400)
+                .body("passwordMatching", notNullValue())
+                .extract()
+                .response();
+        System.out.println("Response body: " + response.jsonPath().getString("passwordMatching"));
+    }
 }
