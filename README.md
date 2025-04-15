@@ -11,7 +11,8 @@ The system comprises the following services:
 - **`patient-service`**: Handles CRUD operations and management of patient records.
 - **`billing-service`**: Processes billing information and integrates with the analytics service. (#In dev)
 - **`analytics-service`**: Aggregates and analyzes data from various services for reporting purposes. (#In dev)
-- **`grpc-requests/billing-service`**: Contains gRPC client definitions for inter-service communication with the billing service.
+- **`grpc-requests/billing-service`**: Contains gRPC client definitions for inter-service communication with the billing service. (Built-in in IntelliJ) (PS: I used Postman to test all REST requests, but the commands present in this folder for gRPC requests)
+- **`integration-test`**: Contains unit tests implemented using RestAssured lib.
 
 ## 🛠️ Technologies Used
 
