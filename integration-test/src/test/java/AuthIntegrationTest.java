@@ -57,7 +57,7 @@ public class AuthIntegrationTest {
     public void shouldReturnOkWithValidUser(){
         String signUpPayload = """
                     {
-                        "email":"signupTest@test.com",
+                        "email":"signupTest0@test.com",
                         "name":"test",
                         "password":"password123",
                         "confirmPassword":"password123",
