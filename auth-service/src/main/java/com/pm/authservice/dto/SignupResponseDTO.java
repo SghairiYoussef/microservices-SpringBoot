@@ -3,8 +3,17 @@ package com.pm.authservice.dto;
 import java.util.Map;
 
 public class SignupResponseDTO {
+    private String name;
     private String email;
     private String message;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;

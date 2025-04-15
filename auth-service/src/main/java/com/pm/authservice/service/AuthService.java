@@ -56,7 +56,8 @@ public class AuthService {
         userRepository.save(user);
         SignupResponseDTO response = new SignupResponseDTO();
         response.setEmail(user.getEmail());
-        response.setMessage("User successfully signed in");
+        response.setName(signupRequestDTO.getName());
+        response.setMessage("User successfully signed up");
         return response;
     }
 }
